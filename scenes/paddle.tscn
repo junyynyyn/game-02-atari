@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ee4b21luyo4y"]
+
+[ext_resource type="Script" path="res://scripts/paddle.gd" id="1_pqcge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7lmb"]
+size = Vector2(120, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_glmm7"]
+
+[node name="Paddle" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_pqcge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j7lmb")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(1.43051e-06, -4.76837e-07)
+scale = Vector2(120, 20)
+mesh = SubResource("BoxMesh_glmm7")
