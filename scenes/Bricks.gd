@@ -13,7 +13,6 @@ var ROWS = 8
 var COLUMNS = 7
 
 func _ready():
-	print("Drawing bricks")
 	var start = START_OFFSET + BRICK_WIDTH / 2
 	for y in range(ROWS):
 		for x in range(COLUMNS):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd7v5bdv538ef"]
+[gd_scene load_steps=11 format=3 uid="uid://bd7v5bdv538ef"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cyvjtnr3rtl5t" path="res://bounce.tres" id="1_ddx6m"]
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_pcyi4"]
@@ -15,6 +15,9 @@ size = Vector2(47, 952)
 size = Vector2(644, 29)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tt8yg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0imxk"]
+size = Vector2(563, 120)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_pcyi4")
@@ -68,9 +71,40 @@ mesh = SubResource("BoxMesh_tt8yg")
 [node name="Paddle" parent="." instance=ExtResource("1_qwvm5")]
 position = Vector2(325, 928)
 
-[node name="RigidBody2D" parent="." instance=ExtResource("2_fjfrj")]
+[node name="Ball" parent="." instance=ExtResource("2_fjfrj")]
 position = Vector2(328, 685)
 
 [node name="Bricks" type="Node2D" parent="."]
 position = Vector2(49, 32)
 script = ExtResource("4_ea4kb")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 641.0
+offset_bottom = 956.0
+
+[node name="Score" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 38.0
+offset_right = 121.0
+offset_bottom = 61.0
+text = "Score: 0"
+
+[node name="Lives" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 519.0
+offset_top = 39.0
+offset_right = 580.0
+offset_bottom = 62.0
+text = "Lives: 3"
+
+[node name="OutArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutArea"]
+position = Vector2(325, 1018)
+shape = SubResource("RectangleShape2D_0imxk")
+
+[connection signal="score_update" from="Ball" to="." method="_on_rigid_body_2d_score_update"]
+[connection signal="body_entered" from="OutArea" to="." method="_on_out_area_body_entered"]
